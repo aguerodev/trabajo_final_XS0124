@@ -44,7 +44,7 @@ output-file: "Becas Socioeconómicas y Movilidad Estudiantil.pdf"
 
 // Configuración de párrafo según APA 7
 #set par(
-  leading: 18pt,           // Doble espacio (12pt × 2)
+  leading: 14pt,           // Doble espacio (12pt × 2)
   first-line-indent: 0.5in, // Sangría de 0.5 pulgadas
   justify: true            // Texto justificado a la izquierda
 )
@@ -136,7 +136,7 @@ Esta situación no es exclusiva de la Universidad de Costa Rica. Otras instituci
 
 A pesar de que existe información sobre la importancia de las becas socioeconómicas y los patrones generales de transporte, son escasos los estudios que analicen cómo estos factores se comportan en poblaciones estudiantiles específicas como es el caso de los estudiantes de la carrera de Estadística de la Universidad de Costa Rica. Esto limita la comprensión de las necesidades de esta población y la posibilidad de diseñar políticas de apoyo más efectivas y dirigidas.
 
-Esta investigación busca aportar información sobre las becas socioeconómicas y los medios de transporte utilizados por estudiantes del curso Análisis Exploratorio de Datos de la carrera de Estadística de la Universidad de Costa Rica. El estudio tiene como objetivo analizar la relación entre las becas socioeconómicas y los medios de transporte utilizados por estudiantes del curso Análisis Exploratorio de Datos de la carrera de Estadística de la Universidad de Costa Rica durante el año 2025. Específicamente, se busca caracterizar los patrones de movilidad de esta población estudiantil, identificar las diferencias en el gasto en transporte según la condición de beca, evaluar la adecuación del monto de la beca deseada por los estudiantes para cubrir sus necesidades, y evaluar la satisfacción de los estudiantes con el monto actual y su categoría de beca asignada.
+Este estudio tiene como objetivo analizar la relación entre las becas socioeconómicas y los medios de transporte utilizados por estudiantes del curso Análisis Exploratorio de Datos de la carrera de Estadística de la Universidad de Costa Rica durante el año 2025. Específicamente, se busca caracterizar los patrones de movilidad de esta población estudiantil, identificar las diferencias en el gasto en transporte según la condición de beca, evaluar la adecuación del monto de la beca deseada por los estudiantes para cubrir sus necesidades, y evaluar la satisfacción de los estudiantes con el monto actual y su categoría de beca asignada.
 
 # Metodología
 

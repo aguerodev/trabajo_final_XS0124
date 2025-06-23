@@ -1,0 +1,225 @@
+---
+title: ""  # Desactiva el título automático
+format:
+  typst:
+    title: ""
+fontsize: 12pt
+lang: es
+bibliography: referencias.bib
+csl: apa.csl
+editor_options: 
+  chunk_output_type: console
+apaquarto:
+  fig-prefix: "Gráfico"
+  tbl-prefix: "Cuadro"
+citeproc: true
+reference-location: block
+output-file: "Becas Socioeconómicas y Movilidad Estudiantil.pdf"
+---
+
+```{=typst}
+// ============================================
+// CONFIGURACIÓN GENERAL DEL DOCUMENTO APA 7
+// ============================================
+
+// Configuración de página según APA 7
+#set page(
+  paper: "us-letter",      // Papel tamaño carta
+  margin: (
+    top: 1in,
+    bottom: 1in,
+    left: 1in,
+    right: 1in
+  ),
+  numbering: "1",          // Numeración arábiga
+  number-align: top + right // Números en esquina superior derecha
+)
+
+// Configuración de texto según APA 7 (tamaño máximo permitido)
+#set text(
+  font: "Times New Roman",  // Times New Roman permite el tamaño más grande
+  size: 12pt,               // 12pt es el tamaño máximo permitido por APA 7
+  lang: "es"                // Idioma español
+)
+
+// Configuración de párrafo según APA 7
+#set par(
+  leading: 18pt,           // Doble espacio (12pt × 2)
+  first-line-indent: 0.5in, // Sangría de 0.5 pulgadas
+  justify: true            // Texto justificado a la izquierda
+)
+
+// Configuración de encabezados
+#set heading(numbering: none) // Sin numeración automática de títulos
+
+// Espaciado adicional para elementos específicos de APA
+#show heading.where(level: 1): it => [
+  #v(12pt) // Espacio antes del título nivel 1
+  #set text(weight: "bold")
+  #it
+  #v(12pt) // Espacio después del título nivel 1
+]
+
+#show heading.where(level: 2): it => [
+  #v(12pt)
+  #set text(weight: "bold")
+  #it
+  #v(6pt)
+]
+
+// ============================================
+// PORTADA APA
+// ============================================
+
+// Espacio vertical desde la parte superior (aproximadamente 1/3 de la página)
+#v(2in)
+
+// TÍTULO (centrado, en negrita, puede ser hasta 12pt según APA 7)
+#align(center)[
+  #text(size: 16pt, weight: "bold")[
+    Becas Socioeconómicas y Movilidad Estudiantil
+  ]
+]
+
+#v(24pt)
+
+// AUTORES (centrados, cada uno en una línea)
+#align(center)[
+  Brandon Villagra Ledezma (C28392) \
+  Carlos Agüero Barquero (B90080) \
+  Grettel Pamela Salazar Morales (C27138) \
+  Nayeli Arauz Torrez (C38793)
+]
+
+#v(24pt)
+
+// INFORMACIÓN INSTITUCIONAL (centrada)
+#align(center)[
+  Universidad de Costa Rica \
+  Escuela de Estadística \
+  Análisis Exploratorio de Datos \
+  Junio 2025
+]
+
+// Nueva página para el contenido
+#pagebreak()
+
+// Reconfigurar página para el resto del documento (mantener numeración)
+#set page(
+  paper: "us-letter",
+  margin: (
+    top: 1in,
+    bottom: 1in,
+    left: 1in,
+    right: 1in
+  ),
+  numbering: "1",          // Mantener numeración
+  number-align: top + right // Mantener números en esquina superior derecha
+)
+```
+
+
+
+# Introducción
+
+La educación universitaria pública en Costa Rica tiene el desafío de asegurar que los estudiantes, independientemente de su situación económica, puedan ingresar, mantenerse y graduarse de la universidad. Para enfrentar esta situación, la Universidad de Costa Rica ha creado un sistema de becas que brinda apoyo a los estudiantes con menores recursos [@araya2019trabajo]. La importancia de este sistema queda clara en los datos presentados por el Consejo Nacional de Rectores (CONARE): en el primer ciclo de 2024, más de la mitad de los estudiantes de la Universidad de Costa Rica, 57.1%, recibió una beca socioeconómica. Esto representa que 23,895 estudiantes, de un total de 41,791 matriculados, recibieron apoyo económico [@corrales2023caracterizacion].
+
+Estas becas están diseñadas para ayudar a los estudiantes en el pago de gastos como transporte, alimentación y vivienda. Como señala @gomez2024becas, estos beneficios permiten que los estudiantes se concentren en sus estudios sin las preocupaciones económicas que normalmente afectan su rendimiento académico y su permanencia en la universidad.
+
+Entre los diferentes gastos que puede tener un estudiante de la UCR, el transporte especialmente es importante sobre todo para aquellos que dependen del transporte público para desplazarse a la universidad. Estudios como el realizado por @produs2016encuesta, muestran que 6 de cada 10 estudiantes, 62%, utilizan transporte público para llegar al campus Rodrigo Facio. Entre las opciones de transporte público, el autobús regular es el más usado, 32.4%, seguido del bus especial de la UCR con un 26.3%. Por el contrario, solo el 24.9% de los estudiantes usaba carro privado, mientras que muy pocos se trasladaban caminando, 9.3%, o en bicicleta, 2.4%.
+
+La relación entre la situación económica del estudiante y los medios de transporte que utiliza ha sido estudiada por @gutierrez2020indice en su investigación sobre la condición económica de los estudiantes universitarios estatales. Sus hallazgos muestran diferencias importantes según el nivel económico: solo el 3.8% de los estudiantes con menores ingresos viajan en automóvil a la universidad, mientras que en el grupo de estudiantes con mayores ingresos esta proporción sube hasta un 45.2%.
+
+Adicionalmente, @gutierrez2020indice encontró que desplazarse caminando para llegar a la universidad es más frecuente entre los estudiantes con menores ingresos y menos común en el grupo con mayores recursos económicos. Esto sugiere que tanto la proximidad al campus como la necesidad económica influyen considerablemente en la elección del medio de transporte. En contraste, el uso del autobús público mostró una distribución más equilibrada entre todos los grupos económicos, siendo utilizado por aproximadamente 7 de cada 10 estudiantes, 70%, lo que confirma que este constituye el medio de transporte más utilizado para el desplazamiento universitario.
+
+Esta situación no es exclusiva de la Universidad de Costa Rica. Otras instituciones como el Tecnológico de Costa Rica (TEC) encuentran patrones similares. @opi2021estudio reportó que el 53.8% de los estudiantes de nuevo ingreso en 2020 utilizan transporte público (autobús) para llegar al campus, mientras que solo el 3.9% llegaban en automóvil propio o compartido. Resulta especialmente relevante que el 59.1% de estos estudiantes nuevos solicitó beca económica, lo que establece una posible relación entre la necesidad de apoyo económico y la dependencia del transporte público.
+
+A pesar de que existe información sobre la importancia de las becas socioeconómicas y los patrones generales de transporte, son escasos los estudios que analicen cómo estos factores se comportan en poblaciones estudiantiles específicas como es el caso de los estudiantes de la carrera de Estadística de la Universidad de Costa Rica. Esto limita la comprensión de las necesidades de esta población y la posibilidad de diseñar políticas de apoyo más efectivas y dirigidas.
+
+Esta investigación busca aportar información sobre las becas socioeconómicas y los medios de transporte utilizados por estudiantes del curso Análisis Exploratorio de Datos de la carrera de Estadística de la Universidad de Costa Rica. El estudio tiene como objetivo analizar la relación entre las becas socioeconómicas y los medios de transporte utilizados por estudiantes del curso Análisis Exploratorio de Datos de la carrera de Estadística de la Universidad de Costa Rica durante el año 2025. Específicamente, se busca caracterizar los patrones de movilidad de esta población estudiantil, identificar las diferencias en el gasto en transporte según la condición de beca, evaluar la adecuación del monto de la beca deseada por los estudiantes para cubrir sus necesidades, y evaluar la satisfacción de los estudiantes con el monto actual y su categoría de beca asignada.
+
+# Metodología
+
+La investigación se desarrolló mediante una encuesta aplicada a 95 estudiantes del curso de Análisis Exploratorio de Datos de la carrera de Estadística de la Universidad de Costa Rica durante el primer ciclo lectivo de 2025, abarcando variables sociodemográficas, tipo de beca, condición actual de la vivienda, medios de transporte utilizados para desplazarse a la universidad, gastos asociados al transporte, medio de transporte de preferencia y satisfacción sobre los recursos económicos recibidos. Esto nos permite generar datos que pueden ser comparados con estudios previos, aportando nueva información sobre equidad educativa y preferencias de movilidad.
+
+# Resultados
+
+La población estudiada, compuesta por un total de 95 estudiantes del curso de Análisis Exploratorio de Datos de la carrera de Estadística de la Universidad de Costa Rica durante el primer ciclo lectivo de 2025, presentó una edad promedio de 18.47 años, con una distribución por sexo de 44.2% femenino y 55.8% masculino [@tbl-01]. En cuanto a la distribución geográfica, se observó una concentración significativa en el área metropolitana, donde la mayoría de los estudiantes reside actualmente en la provincia de San José, 63.2%, seguida por Cartago, 18.9%, Heredia, 11.6%, y otras provincias, 6.3% [@tbl-02], patrón que responde a la ubicación del campus Rodrigo Facio y a los patrones de migración estudiantil documentados en investigaciones anteriores.
+
+Los datos revelan que la mitad de los estudiantes encuestados, 50.5%, cuenta con una beca socioeconómica [@fig-01]. Esta proporción, si bien es alta, es ligeramente inferior al 57.1% reportado por @corrales2023caracterizacion para el total de la población estudiantil de la UCR en 2024, lo que sugiere que la dependencia del apoyo institucional es comparable a la del resto de la universidad.
+
+Respecto a cómo se comportan las diferentes categorías de beca, se puede observar que la Beca 5, la de mayor ayuda económica, es la más frecuente entre los beneficiarios con un 68.8% de los casos [@tbl-03]. Esta condición socioeconómica suele estar vinculada con las condiciones de vivienda y la necesidad de desplazamiento. Se ha encontrado que el 43.8% de los estudiantes becados tuvo que reubicarse para poder estudiar en la universidad [@tbl-05], lo que a menudo implica asumir gastos adicionales en transporte y alquiler.
+
+Similar a lo encontrado por estudios previos como el de @produs2016encuesta, el transporte público se consolida como el principal medio para llegar al campus. Los datos indican que un 70.5% de los encuestados lo utiliza [@fig-03], cifra incluso superior al 62% encontrado en la población general universitaria en años anteriores. El autobús es la opción más frecuente con un 57.9%, lo que deja clara la importancia del transporte público y la dependencia de los estudiantes hacia este para desplazarse a la universidad.
+
+La conexión entre la condición económica y el medio de transporte se vuelve más clara al analizar los datos según la condición de beca, hallazgos que son similares a las conclusiones de @gutierrez2020indice. El uso del transporte privado (automóvil propio o familiar) es mucho más alto en los estudiantes sin beca, quienes constituyen el 90% de los usuarios de este medio. En contraste, dentro del grupo de estudiantes que utilizan transporte público, el 55% son becados, y entre quienes se desplazan a pie, el 56% también lo son [@fig-07].
+
+Esta marcada diferencia en los perfiles de movilidad sugiere que el sistema de becas, además de financiar los estudios con el pago de la matrícula, puede ser determinante en la posibilidad del desplazamiento a la universidad. Sin embargo, al aplicar la encuesta y realizar la pregunta "¿Considera usted que el monto económico otorgado cubre adecuadamente sus necesidades básicas como estudiante?", los resultados indican que casi la mitad de los becados, 45.9%, considera que el monto que recibe no es adecuado para sus gastos básicos [@fig-05]. El grupo más grande de ellos, 45.8%, estima que necesitaría entre ₡0 y ₡50,000 colones extras al mes, mientras que un 35.4% necesita entre ₡50,000 y ₡100,000 [@tbl-07].
+
+La posible insuficiencia del apoyo económico percibida por los estudiantes becados consultados podría explicar por qué los estudiantes, aun con apoyo económico, continúan dependiendo de los medios de transporte de más bajo costo como el autobús y el autobús institucional. Por otra parte, aunque existe discusión sobre si es o no suficiente el monto depositado, los períodos de depósito parecen satisfacer a la mayoría. Un 54.1% está satisfecho con los períodos de depósito y un 70.8% prefiere mantener el sistema de pago mensual antes que otras alternativas como la semanal o quincenal [@fig-06, @tbl-08]. Esto sugiere que las posibles mejoras se centran en el monto del beneficio para que se ajuste mejor al costo de vida estudiantil, más que en los aspectos administrativos de su entrega.
+
+# Conclusión
+
+Los resultados de esta investigación confirman que las becas socioeconómicas son el pilar de la igualdad de oportunidades en la UCR. Sin embargo, enfrentan un problema crítico, el 45.9% considera que el monto no cubre sus necesidades básicas. Esta percepción coincide con las demandas del Movimiento de Estudiantes Becados, que en abril de 2024 solicitó un reajuste acorde con el costo de vida actual [@alfaro2024].
+
+El problema se agrava cuando aumentan los precios del transporte público. El 70.5% de los encuestados depende del autobús para llegar al campus, por lo que cualquier ajuste en las tarifas impacta directamente su presupuesto, por ejemplo, en 2024 ARESEP aumentó las tarifas de siete líneas del sector Este. La ruta 51 (San José – San Pedro – Vargas Araya), una de las más utilizadas para llegar a San Pedro, subió de ₡315 a ₡445 [@telediario2024]. Cada colón adicional obliga a los estudiantes a reajustar como distribuyen sus ya limitados ingresos.
+
+La contradicción entre el aumento del gasto público en becas y la percepción de insuficiencia se explica al analizar el aumento en el costo de la vida, entre 2017 y 2021, las universidades públicas aumentaron el presupuesto para becas un 49.7%, pasando de ₡40,768 a ₡61,031 millones [@rivero2022]. Aunque parece un esfuerzo considerable, en el mismo período subieron los precios de alquileres, transporte y alimentos.
+
+Los datos también revelan que la beca no solo subsidia la matrícula, sino que condiciona la forma de transporte. Los estudiantes sin beca tienden a usar automóvil familiar, mientras que los becarios dependen del transporte público más económico. Cuando las tarifas suben sin que se actualice el monto de la beca, el sistema traslada el costo adicional a los propios beneficiarios, debilitando el objetivo de garantizar la permanencia universitaria. La UCR adelantó el primer depósito de 2025 para aliviar la carga inicial del semestre, pero la respuesta estudiantil demuestra que el problema no es de calendario, sino de monto insuficiente.
+
+En resumen, la misión de que nadie se quede fuera por razones económicas se sostiene en un sistema de becas que necesita actualizarse La evidencia muestra que, mientras el transporte y los alquileres sigan encareciendo sin un ajuste paralelo en las ayudas económicas, la brecha entre la aspiración institucional y la realidad estudiantil seguirá ampliándose.
+
+```{=typst}
+#pagebreak()
+```
+
+# Bibliografía
+
+```{=typst}
+#linebreak()
+```
+::: {#refs}
+:::
+
+```{=typst}
+#pagebreak()
+```
+# Anexos
+
+El código fuente completo del proyecto está disponible para su consulta en el repositorio de GitHub: [https://github.com/aguerodev/trabajo_final_XS0124](https://github.com/aguerodev/trabajo_final_XS0124).
+
+![](images/tbl-01.png){#tbl-01}
+
+![](images/tbl-02.png){#tbl-02}
+
+![](images/fig-01.jpg){#fig-01}
+
+
+![](images/tbl-03.png){#tbl-03}
+
+![](images/fig-02.jpg){#fig-02}
+
+![](images/tbl-04.png){#tbl-04}
+
+![](images/tbl-05.png){#tbl-05}
+
+![](images/fig-03.jpg){#fig-03}
+
+![](images/fig-04.jpg){#fig-04}
+
+
+
+![](images/tbl-06.png){#tbl-06}
+
+![](images/fig-05.jpg){#fig-05}
+
+![](images/tbl-07.png){#tbl-07}
+
+![](images/fig-06.jpg){#fig-06}
+
+![](images/tbl-08.png){#tbl-08}
+
+![](images/tbl-09.png){#tbl-09}
+
+![](images/fig-07.jpg){#fig-07}

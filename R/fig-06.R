@@ -1,0 +1,75 @@
+library(tidyverse)
+library(here)
+library(scales)
+
+
+datos <- read_rds(here("data/datos_limpios.rds"))
+
+df <- datos |>
+  filter(tiene_beca == "Sí") |>
+  count(satisfaccion_periodos) |>
+  mutate(
+    prop = n/sum(n),
+    text = paste0(n," (", scales::percent(prop, accuracy = 0.1),")"),
+    satisfaccion_periodos = fct_relabel(satisfaccion_periodos, \(x) str_wrap(x,20))
+  )
+
+df
+
+g <- ggplot(
+  data = df,
+  mapping = aes(
+    y = satisfaccion_periodos,
+    x = n,
+    label = text
+  )
+) +
+  geom_col() +
+  geom_text(
+    size = 12/.pt,
+    color = "black",
+    hjust = -0.1
+  ) +
+  labs(
+    x = "Frecuencia (personas)",
+    y = "Grado de acuerdo",
+    title = "Costa Rica: Estudiantes del curso Análisis Exploratorio de\nDatos de la Universidad de Costa Rica según grado de\nacuerdo con los periodos de depósito de la beca\nsocioeconómica, junio 2025",
+    subtitle = "(Distribución absoluta y porcentual)",
+    caption = "Fuente: Encuesta a estudiantes de Análisis Exploratorio de Datos, UCR, 2025" ,
+    fill = "¿Cuenta con beca?"
+  ) +
+  scale_x_continuous(
+    breaks = breaks_pretty(n = 5),
+    expand = expansion(mult = c(0,0.3))
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "top",
+    legend.justification = "center",
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank(),
+    plot.caption = element_text(
+      hjust = 0,
+      size = 10,
+      color = "#3F4F44"),
+    axis.title.y = element_text(
+      margin = margin(r = 10)
+    ),
+    axis.title.x = element_text(
+      margin = margin(t = 10, b = 10)
+    ),
+    plot.title = element_text(
+      face = "bold",
+      size = 14
+    ),
+    plot.subtitle = element_text(
+      size = 12
+    ),
+    plot.margin = margin(10,10,10,10),
+    legend.title = element_text(
+      size = 10
+    )
+  )
+g
+ggsave("qmd/images/fig-06.jpg", dpi = 300, height = 5.82, width = 7.65)
